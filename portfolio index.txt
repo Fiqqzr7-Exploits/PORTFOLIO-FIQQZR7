@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>FIQQZR7 | Premium 3D Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #1a1a20; }
+        ::-webkit-scrollbar-thumb { background: #c41e3a; border-radius: 10px; }
+
+        /* Animated Gradient Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(125deg, #0a0a0f 0%, #14141f 50%, #0f0f1a 100%);
+        }
+        
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, rgba(196,30,58,0.15) 0%, transparent 70%);
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .shape {
+            position: absolute;
+            background: rgba(196,30,58,0.1);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: floatShape 20s infinite ease-in-out;
+        }
+        
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(5%, -5%) scale(1.1); }
+            50% { transform: translate(-3%, 8%) scale(0.9); }
+            75% { transform: translate(7%, 3%) scale(1.05); }
+        }
+        
+        .shape1 { width: 400px; height: 400px; top: -100px; left: -100px; animation-duration: 25s; }
+        .shape2 { width: 500px; height: 500px; bottom: -150px; right: -150px; animation-duration: 30s; }
+        .shape3 { width: 300px; height: 300px; top: 50%; left: 50%; animation-duration: 20s; }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(196, 30, 58, 0.3);
+            border-radius: 24px;
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover {
+            border-color: #c41e3a;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -15px rgba(196,30,58,0.3);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 5px rgba(196,30,58,0.3); }
+            50% { text-shadow: 0 0 20px rgba(196,30,58,0.6); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .animate-fade-up { animation: fadeUp 0.8s ease forwards; }
+        .animate-glow { animation: glowPulse 2s infinite; }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        .skill-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #c41e3a, #ff6b8a);
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: #c41e3a;
+            border-radius: 3px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 28px;
+            background: #c41e3a;
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            background: #e03450;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(196,30,58,0.3);
+        }
+        .btn-outline {
+            display: inline-block;
+            padding: 12px 28px;
+            background: transparent;
+            border: 1px solid #c41e3a;
+            color: #c41e3a;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover {
+            background: rgba(196,30,58,0.1);
+            transform: translateY(-3px);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #c41e3a;
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: white;
+            font-size: 13px;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        .toast.show { transform: translateX(0); }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10,10,15,0.9);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(196,30,58,0.3);
+            transition: all 0.3s;
+        }
+        .navbar.scrolled { padding: 0.7rem 2rem; background: rgba(8,8,12,0.95); }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #c41e3a, #8b0000);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #c41e3a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a {
+            color: #a0a0b0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: #c41e3a; }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: rgba(10,10,15,0.95);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(196,30,58,0.3);
+            justify-content: space-between;
+            align-items: center;
+        }
+        .hamburger {
+            width: 30px;
+            height: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .hamburger span {
+            height: 3px;
+            background: #c41e3a;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        
+        .mobile-panel {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100vh;
+            background: rgba(8,8,12,0.98);
+            backdrop-filter: blur(20px);
+            z-index: 101;
+            padding: 80px 24px;
+            transition: right 0.3s;
+            border-left: 1px solid rgba(196,30,58,0.3);
+        }
+        .mobile-panel.open { right: 0; }
+        .mobile-panel a {
+            display: block;
+            padding: 15px 0;
+            color: #a0a0b0;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(196,30,58,0.2);
+            transition: all 0.3s;
+        }
+        .mobile-panel a:hover { color: #c41e3a; padding-left: 10px; }
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .menu-overlay.active { opacity: 1; visibility: visible; }
+
+        @media (max-width: 768px) {
+            .navbar { display: none; }
+            .mobile-nav { display: flex; }
+            .section-title { font-size: 1.8rem; }
+            .hero h1 { font-size: 2rem !important; }
+            .section { padding: 3rem 1rem !important; }
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 1.5rem 3rem;
+        }
+        .hero-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(196,30,58,0.15);
+            border: 1px solid rgba(196,30,58,0.4);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            color: #c41e3a;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .hero h1 span { color: #c41e3a; }
+        .hero p {
+            color: #a0a0b0;
+            max-width: 600px;
+            margin: 1rem auto;
+        }
+
+        .skills-grid, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .skill-card, .project-card, .contact-card {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .skill-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        /* Project Image Styling */
+        .project-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+        .project-card:hover .project-img {
+            transform: scale(1.02);
+        }
+        .tag {
+            display: inline-block;
+            background: rgba(196,30,58,0.2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: #c41e3a;
+            margin: 3px;
+        }
+        .about-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+        .avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 3px solid #c41e3a;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+        .section { padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(196,30,58,0.2);
+            font-size: 0.8rem;
+            color: #6a6a7a;
+        }
+        
+        /* Particle Canvas */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="animated-bg"></div>
+<div class="gradient-overlay"></div>
+<div class="floating-shapes">
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+</div>
+<canvas id="particleCanvas"></canvas>
+
+<!-- Desktop Navigation -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <div class="logo" id="logoDesktop">
+            <div class="logo-icon">F7</div>
+            <div class="logo-text">FIQQ<span style="color:#c41e3a;">ZR7</span></div>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Navigation -->
+<div class="mobile-nav">
+    <div class="logo" id="logoMobile">
+        <div class="logo-icon">F7</div>
+        <div class="logo-text">FIQQ<span style="color:#c41e3a;">ZR7</span></div>
+    </div>
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+<div class="mobile-panel" id="mobilePanel">
+    <a href="#home">🏠 Home</a>
+    <a href="#about">👤 About</a>
+    <a href="#skills">💻 Skills</a>
+    <a href="#projects">📁 Projects</a>
+    <a href="#contact">📧 Contact</a>
+</div>
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<!-- Hero -->
+<section id="home" class="hero">
+    <div>
+        <div class="hero-badge animate-glow">✦ ULTIMATE 3D PORTFOLIO ✦</div>
+        <h1><span>FIQQZR7</span><br>Script & 3D Creator</h1>
+        <p>Mastering Lua, HTML, CSS, JavaScript, Three.js — crafting premium scripts and immersive 3D experiences.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+            <a href="#about" class="btn-primary">Explore</a>
+            <a href="#projects" class="btn-outline">View Work</a>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about" class="section">
+    <h2 class="section-title">About Me</h2>
+    <div class="glass-card about-card" id="aboutCard">
+        <img src="https://ui-avatars.com/api/?background=c41e3a&color=fff&bold=true&size=150&name=F&fontsize=80" alt="FIQQZR7" class="avatar" id="profileImg">
+        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">FIQQZR7</h3>
+        <p style="color: #c41e3a; margin-bottom: 1rem;">Script Developer | 3D Web Designer</p>
+        <p style="color: #a0a0b0;">Passionate about creating powerful scripts, smooth UI, and immersive 3D web experiences. Specialized in <strong style="color:#c41e3a;">Lua</strong> for Roblox, and front-end development with <strong style="color:#c41e3a;">Three.js</strong>, <strong style="color:#c41e3a;">HTML5</strong>, <strong style="color:#c41e3a;">CSS3</strong>, and <strong style="color:#c41e3a;">JavaScript</strong>.</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: #6a6a7a;">📍 Malaysia | ⚡ 5+ Years Experience</p>
+    </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="section">
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-grid">
+        <div class="glass-card skill-card">
+            <div class="skill-icon" style="color: #00a2ff;">🔥 <i class="fab fa-laravel"></i></div>
+            <div class="skill-name">Lua Scripting</div>
+            <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+            <p style="font-size: 0.8rem; color: #a0a0b0;">Expert • 95%</p>
+        </div>
+        <div class="glass-card skill-card">
+            <div class="skill-icon" style="color: #e34c26;"><i class="fab fa-html5"></i> HTML5</div>
+            <div class="skill-name">HTML5</div>
+            <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+            <p style="font-size: 0.8rem; color: #a0a0b0;">Advanced • 90%</p>
+        </div>
+        <div class="glass-card skill-card">
+            <div class="skill-icon" style="color: #264de4;"><i class="fab fa-css3-alt"></i> CSS3</div>
+            <div class="skill-name">CSS3</div>
+            <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+            <p style="font-size: 0.8rem; color: #a0a0b0;">Advanced • 88%</p>
+        </div>
+        <div class="glass-card skill-card">
+            <div class="skill-icon" style="color: #f7df1e;"><i class="fab fa-js"></i> JavaScript</div>
+            <div class="skill-name">JavaScript</div>
+            <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+            <p style="font-size: 0.8rem; color: #a0a0b0;">Advanced • 85%</p>
+        </div>
+    </div>
+</section>
+
+<!-- Projects with Images -->
+<section id="projects" class="section">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+        <div class="glass-card project-card">
+            <img src="https://placehold.co/400x200/c41e3a/ffffff?text=FIQQZR7+RTX" alt="FIQQZR7 RTX" class="project-img">
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">FIQQZR7 RTX</h3>
+            <p style="color: #a0a0b0; font-size: 0.85rem;">Premium visual enhancement suite with dark red glow effects, bloom, and atmospheric lighting.</p>
+            <div style="margin-top: 1rem;"><span class="tag">Lua</span><span class="tag">Roblox</span><span class="tag">UI</span></div>
+        </div>
+        <div class="glass-card project-card">
+            <img src="https://placehold.co/400x200/2c3e50/ffffff?text=3D+Portfolio" alt="3D Portfolio" class="project-img">
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">3D Portfolio</h3>
+            <p style="color: #a0a0b0; font-size: 0.85rem;">Interactive 3D portfolio with Three.js, smooth animations, and responsive design.</p>
+            <div style="margin-top: 1rem;"><span class="tag">Three.js</span><span class="tag">HTML5</span><span class="tag">CSS3</span></div>
+        </div>
+        <div class="glass-card project-card">
+            <img src="https://placehold.co/400x200/8b0000/ffffff?text=FIQQZR7+SKY" alt="FIQQZR7 SKY" class="project-img">
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">FIQQZR7 SKY</h3>
+            <p style="color: #a0a0b0; font-size: 0.85rem;">Ultra smooth UI with spin mode, glitch effects, big jacket animation, premium dark red aesthetic.</p>
+            <div style="margin-top: 1rem;"><span class="tag">Lua</span><span class="tag">Animation</span><span class="tag">Physics</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section">
+    <h2 class="section-title">Connect With Me</h2>
+    <div class="contact-grid">
+        <a href="https://discord.gg/fiqqzr7" target="_blank" class="glass-card contact-card" style="text-decoration: none; color: inherit;">
+            <i class="fab fa-discord" style="font-size: 2rem; color: #5865F2; margin-bottom: 0.5rem; display: inline-block;"></i>
+            <div style="font-weight: 600;">Discord</div>
+            <div style="font-size: 0.8rem; color: #a0a0b0;">@fiqqzr7</div>
+        </a>
+        <a href="https://github.com/fiqqzr7" target="_blank" class="glass-card contact-card" style="text-decoration: none; color: inherit;">
+            <i class="fab fa-github" style="font-size: 2rem; color: #fff; margin-bottom: 0.5rem; display: inline-block;"></i>
+            <div style="font-weight: 600;">GitHub</div>
+            <div style="font-size: 0.8rem; color: #a0a0b0;">/fiqqzr7</div>
+        </a>
+        <a href="mailto:fiqqzr7@proton.me" class="glass-card contact-card" style="text-decoration: none; color: inherit;">
+            <i class="fas fa-envelope" style="font-size: 2rem; color: #c41e3a; margin-bottom: 0.5rem; display: inline-block;"></i>
+            <div style="font-weight: 600;">Email</div>
+            <div style="font-size: 0.8rem; color: #a0a0b0;">fiqqzr7@proton.me</div>
+        </a>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>© 2025 FIQQZR7 | Master of Lua, HTML, CSS, JavaScript, Three.js | Dark Red Edition</p>
+</footer>
+
+<div id="toast" class="toast">
+    <i class="fas fa-cube"></i> FIQQZR7 — 3D Portfolio Ready!
+</div>
+
+<script>
+    // Particle Animation Background
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    let particles = [];
+    const particleCount = window.innerWidth < 768 ? 60 : 100;
+    
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.3,
+            color: `rgba(196, 30, 58, ${Math.random() * 0.4 + 0.2})`
+        });
+    }
+    
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.x += p.speedX;
+            p.y += p.speedY;
+            if (p.x < 0) p.x = canvas.width;
+            if (p.x > canvas.width) p.x = 0;
+            if (p.y < 0) p.y = canvas.height;
+            if (p.y > canvas.height) p.y = 0;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+        });
+        requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+    
+    // Skill Bars
+    const skillBars = document.querySelectorAll('.skill-fill');
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const width = entry.target.getAttribute('data-width');
+                entry.target.style.width = width + '%';
+            }
+        });
+    }, { threshold: 0.3 });
+    skillBars.forEach(bar => skillObserver.observe(bar));
+    
+    // Scroll Animations
+    const cards = document.querySelectorAll('.skill-card, .project-card, .contact-card, #aboutCard');
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+    cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'all 0.6s ease';
+        cardObserver.observe(card);
+    });
+    
+    // Navbar Scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+    });
+    
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            closeMobileMenu();
+        });
+    });
+    
+    // Mobile Menu
+    const hamburger = document.getElementById('hamburger');
+    const mobilePanel = document.getElementById('mobilePanel');
+    const overlay = document.getElementById('menuOverlay');
+    function closeMobileMenu() {
+        hamburger.classList.remove('active');
+        mobilePanel.classList.remove('open');
+        overlay.classList.remove('active');
+    }
+    function openMobileMenu() {
+        hamburger.classList.add('active');
+        mobilePanel.classList.add('open');
+        overlay.classList.add('active');
+    }
+    hamburger.addEventListener('click', () => {
+        if (mobilePanel.classList.contains('open')) closeMobileMenu();
+        else openMobileMenu();
+    });
+    overlay.addEventListener('click', closeMobileMenu);
+    
+    // Toast
+    const toast = document.getElementById('toast');
+    setTimeout(() => {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+    }, 1500);
+    
+    // Logo Click Change Image
+    const logos = document.querySelectorAll('#logoDesktop, #logoMobile');
+    const profileImg = document.getElementById('profileImg');
+    const images = [
+        'https://ui-avatars.com/api/?background=c41e3a&color=fff&bold=true&size=150&name=F&fontsize=80',
+        'https://ui-avatars.com/api/?background=2c3e50&color=fff&bold=true&size=150&name=7&fontsize=80',
+        'https://ui-avatars.com/api/?background=9b59b6&color=fff&bold=true&size=150&name=Z&fontsize=80',
+        'https://ui-avatars.com/api/?background=e67e22&color=fff&bold=true&size=150&name=R&fontsize=80'
+    ];
+    let imgIndex = 0;
+    logos.forEach(logo => {
+        logo.style.cursor = 'pointer';
+        logo.addEventListener('click', () => {
+            imgIndex = (imgIndex + 1) % images.length;
+            if (profileImg) profileImg.src = images[imgIndex];
+            const iconDiv = logo.querySelector('.logo-icon');
+            if (iconDiv) {
+                const letter = images[imgIndex].match(/name=([A-Z])/)?.[1] || 'F';
+                iconDiv.innerHTML = letter;
+            }
+        });
+    });
+    
+    // Change project images on click (demo - boleh ganti dengan gambar sendiri)
+    const projectImages = document.querySelectorAll('.project-img');
+    const imageUrls = [
+        'https://placehold.co/400x200/c41e3a/ffffff?text=RTX+Glow+Effect',
+        'https://placehold.co/400x200/2c3e50/ffffff?text=Three.js+3D',
+        'https://placehold.co/400x200/8b0000/ffffff?text=Smooth+UI+Animation'
+    ];
+    
+    console.log('%c🔥 FIQQZR7 ULTIMATE 3D PORTFOLIO 🔥', 'color: #c41e3a; font-size: 16px; font-weight: bold;');
+    console.log('%c✦ Lua | HTML | CSS | JavaScript | Three.js ✦', 'color: #a0a0b0;');
+</script>
+</body>
+</html>
